@@ -1845,5 +1845,140 @@ VALUES
 (116047, 'Dr. Raghav Rao', 'raghav2.ch1@srmist.edu.in', '9876544447', 'Chemical Engineering',TRUE),
 (116048, 'Dr. Nisha Nanda', 'nisha2.ch1@srmist.edu.in', '9876544448', 'Chemical Engineering',TRUE);
 
+-- Insert data into Room table
+INSERT INTO Room (room_id, room_no, building, room_type, capacity) VALUES
+-- TP 101 to TP 106 (Single)
+(1, 'TP 101', 'TP', 'Single', 60),
+(2, 'TP 102', 'TP', 'Single', 60),
+(3, 'TP 103', 'TP', 'Single', 60),
+(4, 'TP 105', 'TP', 'Single', 60),
+(5, 'TP 201', 'TP', 'Single', 60),
+(6, 'TP 202', 'TP', 'Single', 60),
+(7, 'TP 203', 'TP', 'Single', 60),
+(8, 'TP 204', 'TP', 'Single', 60),
+(9, 'TP 205', 'TP', 'Single', 60),
+(10, 'TP 206', 'TP', 'Single', 60),
+-- TP 301 to TP 306 (Single)
+(11, 'TP 301', 'TP', 'Single', 60),
+(12, 'TP 302', 'TP', 'Single', 60),
+(13, 'TP 303', 'TP', 'Single', 60),
+(14, 'TP 304', 'TP', 'Single', 60),
+(15, 'TP 305', 'TP', 'Single', 60),
+(16, 'TP 306', 'TP', 'Single', 60),
+-- TP 401 & TP 402 (Double)
+(17, 'TP 401', 'TP', 'Double', 60),
+(18, 'TP 402', 'TP', 'Double', 60),
+-- TP 403 (Single)
+(19, 'TP 403', 'TP', 'Single', 60),
+-- TP 404 & TP 405 (Double)
+(20, 'TP 404', 'TP', 'Double', 60),
+(21, 'TP 405', 'TP', 'Double', 60),
+-- TP 406 (Single)
+(22, 'TP 406', 'TP', 'Single', 60),
+-- TP 501 & TP 502 (Double)
+(23, 'TP 501', 'TP', 'Double', 60),
+(24, 'TP 502', 'TP', 'Double', 60),
+-- TP 503 to TP 506 (Single)
+(25, 'TP 503', 'TP', 'Single', 60),
+(26, 'TP 504', 'TP', 'Single', 60),
+(27, 'TP 505', 'TP', 'Single', 60),
+(28, 'TP 506', 'TP', 'Single', 60),
+-- TP 601 to TP 606 (Single)
+(29, 'TP 601', 'TP', 'Single', 60),
+(30, 'TP 602', 'TP', 'Single', 60),
+(31, 'TP 603', 'TP', 'Single', 60),
+(32, 'TP 605', 'TP', 'Single', 60),
+(33, 'TP 606', 'TP', 'Single', 60),
+-- TP 701 to TP 706 (Single)
+(34, 'TP 701', 'TP', 'Single', 60),
+(35, 'TP 702', 'TP', 'Single', 60),
+(36, 'TP 703', 'TP', 'Single', 60),
+(37, 'TP 704', 'TP', 'Single', 60),
+(38, 'TP 705', 'TP', 'Single', 60),
+(39, 'TP 706', 'TP', 'Single', 60),
+-- TP 801 to TP 804 (Single)
+(40, 'TP 801', 'TP', 'Single', 60),
+(41, 'TP 802', 'TP', 'Single', 60),
+(42, 'TP 803', 'TP', 'Single', 60),
+(43, 'TP 804', 'TP', 'Single', 60),
+-- TP 805 & TP 806 (Double)
+(44, 'TP 805', 'TP', 'Double', 60),
+(45, 'TP 806', 'TP', 'Double', 60),
+-- TP 901 to TP 906 (Single)
+(46, 'TP 901', 'TP', 'Single', 60),
+(47, 'TP 902', 'TP', 'Single', 60),
+(48, 'TP 903', 'TP', 'Single', 60),
+(49, 'TP 904', 'TP', 'Single', 60),
+(50, 'TP 905', 'TP', 'Single', 60),
+(51, 'TP 906', 'TP', 'Single', 60),
+-- TP 1001 to TP 1006 (Single)
+(52, 'TP 1001', 'TP', 'Single', 60),
+(53, 'TP 1002', 'TP', 'Single', 60),
+(54, 'TP 1003', 'TP', 'Single', 60),
+(55, 'TP 1004', 'TP', 'Single', 60),
+(56, 'TP 1005', 'TP', 'Single', 60),
+(57, 'TP 1006', 'TP', 'Single', 60),
+-- TP 1101 to TP 1106 (Single)
+(58, 'TP 1101', 'TP', 'Single', 60),
+(59, 'TP 1102', 'TP', 'Single', 60),
+(60, 'TP 1103', 'TP', 'Single', 60),
+(61, 'TP 1104', 'TP', 'Single', 60),
+(62, 'TP 1105', 'TP', 'Single', 60),
+(63, 'TP 1106', 'TP', 'Single', 60),
+-- TP 1201 to TP 1206 (Single)
+(64, 'TP 1201', 'TP', 'Single', 60),
+(65, 'TP 1202', 'TP', 'Single', 60),
+(66, 'TP 1203', 'TP', 'Single', 60),
+(67, 'TP 1204', 'TP', 'Single', 60),
+(68, 'TP 1205', 'TP', 'Single', 60),
+(69, 'TP 1206', 'TP', 'Single', 60),
+-- TP 1301 to TP 1306 (Single)
+(70, 'TP 1301', 'TP', 'Single', 60),
+(71, 'TP 1302', 'TP', 'Single', 60),
+(72, 'TP 1303', 'TP', 'Single', 60),
+(73, 'TP 1304', 'TP', 'Single', 60),
+(74, 'TP 1305', 'TP', 'Single', 60),
+(75, 'TP 1306', 'TP', 'Single', 60),
+-- TP 1401 to TP 1406 (Single)
+(76, 'TP 1401', 'TP', 'Single', 60),
+(77, 'TP 1402', 'TP', 'Single', 60),
+(78, 'TP 1403', 'TP', 'Single', 60),
+(79, 'TP 1404', 'TP', 'Single', 60),
+(80, 'TP 1405', 'TP', 'Single', 60),
+(81, 'TP 1406', 'TP', 'Single', 60),
+-- TP 1501 to TP 1506 (Single)
+(82, 'TP 1501', 'TP', 'Single', 60),
+(83, 'TP 1502', 'TP', 'Single', 60),
+(84, 'TP 1503', 'TP', 'Single', 60),
+(85, 'TP 1504', 'TP', 'Single', 60),
+(86, 'TP 1505', 'TP', 'Single', 60),
+(87, 'TP 1506', 'TP', 'Single', 60);
 
+SELECT * FROM student;
+SELECT * FROM faculty;
+SELECT * FROM room;
+
+-- Find duplicate email IDs in Faculty table
+SELECT email, COUNT(*)
+FROM Faculty
+GROUP BY email
+HAVING COUNT(*) > 1;
+
+-- Find duplicate phone numbers in Faculty table
+SELECT phone_number, COUNT(*)
+FROM Faculty
+GROUP BY phone_number
+HAVING COUNT(*) > 1;
+
+-- Find duplicate email IDs in Student table
+SELECT email, COUNT(*)
+FROM Student
+GROUP BY email
+HAVING COUNT(*) > 1;
+
+-- Find duplicate phone numbers in Student table
+SELECT phone_number, COUNT(*)
+FROM Student
+GROUP BY phone_number
+HAVING COUNT(*) > 1;
 
