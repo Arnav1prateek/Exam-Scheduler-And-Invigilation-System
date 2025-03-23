@@ -1982,3 +1982,22 @@ FROM Student
 GROUP BY phone_number
 HAVING COUNT(*) > 1;
 
+ALTER TABLE Exam
+ADD COLUMN subject_code VARCHAR(20);
+
+ALTER TABLE Exam
+ADD COLUMN subject_name VARCHAR(100);
+
+ALTER TABLE Exam
+ADD COLUMN duration INT;
+
+ALTER TABLE Exam
+ADD COLUMN is_open_book BOOLEAN DEFAULT FALSE;
+
+UPDATE Exam
+SET 
+    subject_code = SUBSTRING(subject, 1, 9), -- Extract the first 9 characters as subject code
+    subject_name = TRIM(SUBSTRING(subject, 12)); -- Extract everything after the hyphen as subject name
+
+UPDATE Exam
+SET duration = 180;
