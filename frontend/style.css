@@ -1,0 +1,49 @@
+/* Logo Banner */
+.banner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #003366;
+    color: white;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  
+  .logo {
+    height: 60px;
+  }
+  
+  /* Role Selection Area */
+  .role-selection {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .roles {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+  
+  .role-card {
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 20px 40px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: background 0.3s ease;
+    min-width: 150px;
+  }
+  
+  .role-card:hover {
+    background: #0056b3;
+  }
+  
