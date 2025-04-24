@@ -103,6 +103,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
         });
+
+        // Add logout functionality
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            // Clear any session data
+            localStorage.removeItem('facultyToken');
+            // Redirect to login page
+            window.location.href = '../login.html';
+        });
         
     } catch (err) {
         console.error('Error:', err);

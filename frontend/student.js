@@ -74,6 +74,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 tbody.appendChild(row);
             });
         }
+
+        // Add logout functionality
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            // Clear any session data
+            localStorage.removeItem('studentToken');
+            // Redirect to login page
+            window.location.href = '../login.html';
+        });
         
     } catch (err) {
         console.error('Error loading student dashboard:', err);
