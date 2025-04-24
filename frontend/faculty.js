@@ -3,24 +3,66 @@ document.addEventListener('DOMContentLoaded', async () => {
     const facultyId = urlParams.get('id');
   
     try {
-      const res = await fetch(`http://localhost:3000/api/faculty/${facultyId}`);
-      const data = await res.json();
-      
-      // data.exams is the array you're looking for
-      const tbody = document.getElementById('invigilation-body');
-      data.exams.forEach(item => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${item.subject}</td>
-          <td>${item.date}</td>
-          <td>${item.start_time}</td>
-          <td>${item.end_time}</td>
-          <td>${item.room_no}</td>
-        `;
-        tbody.appendChild(row);
-      });
+        // Fetch faculty data and exams
+        const res = await fetch(`http://localhost:3000/api/faculty/${facultyId}`);
+        const data = await res.json();
+        
+        // Update profile section
+        document.getElementById('faculty-name').textContent = data.faculty.name;
+        document.getElementById('faculty-department').textContent = data.faculty.department;
+        
+        // Set current date
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', options);
+        
+        // Set up availability toggle
+        const toggle = document.getElementById('availability-toggle');
+        toggle.checked = data.faculty.availability_status;
+        updateAvailabilityText(toggle.checked);
+        
+        toggle.addEventListener('change', async () => {
+            const isAvailable = toggle.checked;
+            updateAvailabilityText(isAvailable);
+            
+            try {
+                await fetch(`http://localhost:3000/api/faculty/${facultyId}/availability`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ availability: isAvailable })
+                });
+            } catch (err) {
+                console.error('Error updating availability:', err);
+                alert('Failed to update availability status');
+                toggle.checked = !isAvailable; // Revert on error
+            }
+        });
+        
+        // Populate exams table
+        const tbody = document.getElementById('invigilation-body');
+        data.exams.forEach(exam => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${exam.subject}</td>
+                <td>${new Date(exam.date).toLocaleDateString()}</td>
+                <td>${exam.start_time} - ${exam.end_time}</td>
+                <td>${exam.room_no || 'TBD'}</td>
+                <td>
+                    <button class="btn-view">View Details</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+        
     } catch (err) {
-      alert('Error fetching invigilation schedule');
+        console.error('Error:', err);
+        alert('Error loading faculty dashboard');
     }
-  });
-  
+});
+
+function updateAvailabilityText(isAvailable) {
+    const textElement = document.getElementById('availability-text');
+    textElement.textContent = isAvailable ? 'Available for invigilation' : 'Not available';
+    textElement.style.color = isAvailable ? '#4CAF50' : '#F44336';
+}

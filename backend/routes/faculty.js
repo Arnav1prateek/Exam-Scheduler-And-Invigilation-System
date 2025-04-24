@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { getFacultyExams } = require('../controllers/facultyController');
+const { 
+  getFacultyExams,
+  updateFacultyAvailability
+} = require('../controllers/facultyController');
 
-// GET /api/faculty/:id
+// GET faculty details and exams
 router.get('/:id', getFacultyExams);
+
+// PUT update faculty availability
+router.put('/:id/availability', updateFacultyAvailability);
 
 module.exports = router;

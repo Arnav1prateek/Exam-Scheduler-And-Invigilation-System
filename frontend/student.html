@@ -2,26 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Dashboard</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Student Exam Timetable</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Subject</th>
-          <th>Date</th>
-          <th>Start Time</th>
-          <th>End Time</th>
-          <th>Room No</th>
-        </tr>
-      </thead>
-      <tbody id="timetable-body">
-        <!-- Timetable rows will be added here -->
-      </tbody>
-    </table>
+  <div class="student-container">
+    <aside class="sidebar">
+      <div class="profile-section">
+        <div class="profile-pic">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <h3 id="student-name">Loading...</h3>
+        <p id="student-info"></p>
+      </div>
+      <div class="academic-info">
+        <h4>Academic Details</h4>
+        <div class="info-item">
+          <span>Department:</span>
+          <span id="student-dept"></span>
+        </div>
+        <div class="info-item">
+          <span>Year:</span>
+          <span id="student-year"></span>
+        </div>
+        <div class="info-item">
+          <span>Semester:</span>
+          <span id="student-semester"></span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="dashboard-header">
+        <h1>Exam Timetable</h1>
+        <p id="current-date"></p>
+      </header>
+
+      <div class="timetable-section">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Room</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="timetable-body">
+              <!-- Timetable rows will be added here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
   </div>
 
   <script src="student.js"></script>

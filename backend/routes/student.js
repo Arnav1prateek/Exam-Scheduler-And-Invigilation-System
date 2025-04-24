@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getTimetable } = require('../controllers/studentController');
+const studentController = require('../controllers/studentController');
 
-// GET /api/student/:id
-router.get('/:id', getTimetable);
+// Route to get student timetable
+router.get('/:id', studentController.getTimetable);
 
 module.exports = router;

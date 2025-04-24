@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- ✅ Defer script to wait for DOM to load -->
-  <script defer src="login.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESIAS Login</title>
+  <link rel="stylesheet" href="./style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="login-container">
-    <h2>Login</h2>
-    <form id="loginForm">
-      <label for="userId">Enter your ID:</label>
-      <input type="text" id="userId" name="userId" required />
-      <button type="submit">Login</button> <!-- ✅ No onclick -->
-    </form>
-    <p id="error" class="error-msg"></p>
+    <div class="login-card">
+      <div class="login-header">
+        <img src="download.png" alt="ESIAS Logo" class="login-logo">
+        <h2>Welcome to ESIAS</h2>
+        <p>Please enter your ID to continue</p>
+      </div>
+
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="userId">User ID</label>
+          <input type="text" id="userId" placeholder="Enter your ID" required>
+        </div>
+        <button type="submit" class="login-btn">Login</button>
+        <p id="error" class="error-message"></p>
+      </form>
+    </div>
   </div>
+
+  <script src="login.js"></script>
 </body>
 </html>
