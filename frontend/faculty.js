@@ -55,9 +55,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <td>${exam.room_no || 'TBD'}</td>
                 <td>
                     <label class="switch">
-                        <input type="checkbox" id="${toggleId}" class="exam-toggle">
+                        <input type="checkbox" id="${toggleId}" class="exam-toggle" 
+                            ${exam.is_available ? 'checked' : ''}
+                            ${exam.is_full && !exam.is_available ? 'disabled' : ''}>
                         <span class="slider round"></span>
                     </label>
+                    ${exam.is_full ? '<span class="full-badge">Full</span>' : ''}
                 </td>
             `;
             tbody.appendChild(row);
@@ -66,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const examToggle = document.getElementById(toggleId);
             examToggle.addEventListener('change', async () => {
                 try {
-                    await fetch(`http://localhost:3000/api/exams/${exam.exam_id}/availability`, {
+                    const response = await fetch(`http://localhost:3000/api/faculty/exams/${exam.exam_id}/availability`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -76,6 +79,23 @@ document.addEventListener('DOMContentLoaded', async () => {
                             isAvailable: examToggle.checked 
                         })
                     });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        alert(errorData.message);
+                        examToggle.checked = !examToggle.checked; // Revert on error
+                        return;
+                    }
+
+                    const result = await response.json();
+                    if (result.is_full) {
+                        // Update UI to show exam is now full
+                        const badge = examToggle.parentElement.querySelector('.full-badge') || 
+                                     document.createElement('span');
+                        badge.className = 'full-badge';
+                        badge.textContent = 'Full';
+                        examToggle.parentElement.appendChild(badge);
+                    }
                 } catch (err) {
                     console.error('Error updating exam availability:', err);
                     alert('Failed to update exam availability');

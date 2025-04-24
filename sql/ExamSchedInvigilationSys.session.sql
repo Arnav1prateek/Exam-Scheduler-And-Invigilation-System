@@ -2840,3 +2840,5 @@ FROM Faculty
 WHERE faculty_id = 102077;
 
 DELETE FROM faculty;
+
+ALTER TABLE Exam ADD COLUMN max_invigilators INT DEFAULT 2;
