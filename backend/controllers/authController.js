@@ -1,36 +1,27 @@
 const pool = require('../db');
 
-const handleLogin = async (req, res) => {
+const login = async (req, res) => {
   const { id } = req.body;
 
   try {
-    // Check if student
-    const studentResult = await pool.query(
-      'SELECT * FROM students WHERE regno = $1',
-      [id]
-    );
+    const studentResult = await pool.query(`SELECT * FROM Student WHERE student_id = $1`, [id]);
 
     if (studentResult.rows.length > 0) {
-      return res.json({ userType: 'student', data: studentResult.rows[0] });
+      return res.json({ role: 'student', id });
     }
 
-    // Check if teacher
-    const teacherResult = await pool.query(
-      'SELECT * FROM teachers WHERE staffid = $1',
-      [id]
-    );
+    const facultyResult = await pool.query(`SELECT * FROM Faculty WHERE faculty_id = $1`, [id]);
 
-    if (teacherResult.rows.length > 0) {
-      return res.json({ userType: 'teacher', data: teacherResult.rows[0] });
+    if (facultyResult.rows.length > 0) {
+      return res.json({ role: 'faculty', id });
     }
 
-    // No match
-    res.status(404).json({ message: 'ID not found' });
+    return res.status(404).json({ message: 'User not found' });
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Login error' });
   }
 };
 
-module.exports = { handleLogin };
+module.exports = { login };

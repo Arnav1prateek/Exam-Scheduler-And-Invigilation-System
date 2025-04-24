@@ -1,17 +1,21 @@
 const express = require('express');
-const pool = require('./db');
 const app = express();
+const cors = require('cors');
+const path = require('path');
 
-app.get('/test-db', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT NOW()');
-    res.send(result.rows[0]);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Database connection error');
-  }
-});
+const authRoutes = require('./routes/auth');
+const studentRoutes = require('./routes/student');
+const facultyRoutes = require('./routes/faculty');
 
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/api/auth', authRoutes);
+app.use('/api/student', studentRoutes);
+app.use('/api/faculty', facultyRoutes);
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

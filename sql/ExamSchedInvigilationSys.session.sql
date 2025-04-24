@@ -2663,3 +2663,5 @@ WHERE
     AND s.department = 'Computing Technologies'
 ORDER BY 
     e.date, e.start_time;
+
+
