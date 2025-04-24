@@ -4,7 +4,11 @@ const path = require('path');
 const cors = require('cors');
 const PORT = 3000;
 
-app.use(cors());
+// Middleware setup
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 app.use(express.json());
 
 // Serve static frontend files
@@ -14,29 +18,38 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 const authRoutes = require('./routes/auth');
 const studentRoutes = require('./routes/student');
 const facultyRoutes = require('./routes/faculty');
+const adminRoutes = require('./routes/admin');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/faculty', facultyRoutes);
+app.use('/api/admin', adminRoutes);
 
-// Route to serve login.html
+// HTML page routes
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/login.html'));
 });
 
-// Route to serve faculty.html
 app.get('/faculty', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/faculty.html'));
 });
 
-// Route to serve student.html
 app.get('/student', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/student.html'));
 });
 
-// Default: serve index.html
+app.get('/admin', (req, res) => {  // Added admin route
+  res.sendFile(path.join(__dirname, '../frontend/admin.html'));
+});
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
 app.listen(PORT, () => {

@@ -361,3 +361,78 @@
   .student-container .logout-section {
     margin-top: 2rem;
   }
+
+
+  /* Admin Dashboard Styles */
+.admin-nav {
+    margin-top: 2rem;
+    padding: 0 1rem;
+}
+
+.admin-nav h4 {
+    color: var(--light-color);
+    margin: 1.5rem 0 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.admin-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.admin-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.nav-btn {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: transparent;
+    color: var(--light-color);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s;
+}
+
+.nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-color);
+}
+
+.dept-select {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.print-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--warning-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.print-btn:hover {
+    background-color: #e67e22;
+}
+
+.profile-pic i.fa-user-shield {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+}
