@@ -2834,6 +2834,7 @@ CROSS JOIN Faculty f
 WHERE e.department = 'Computing Technologies'
 AND f.department = 'Computing Technologies';
 
+SELECT * from exam_faculty;
 
 SELECT faculty_id as id, name, department, availability_status 
 FROM Faculty 
@@ -2842,3 +2843,20 @@ WHERE faculty_id = 102077;
 DELETE FROM faculty;
 
 ALTER TABLE Exam ADD COLUMN max_invigilators INT DEFAULT 2;
+
+UPDATE Exam 
+SET max_invigilators = 2
+WHERE subject_name IN ('ARTIFICIAL INTELLIGENCE', 'SOCIAL ENGINEERING');
+
+
+DELETE FROM Exam_Faculty 
+WHERE exam_id IN (
+  SELECT exam_id FROM Exam 
+  WHERE subject_name IN (
+    'ARTIFICIAL INTELLIGENCE', 
+    'SOCIAL ENGINEERING',
+    'DESIGN AND ANALYSIS OF ALGORITHMS', 
+    'PROBABILITY AND QUEUEING THEORY'
+  )
+);
+
