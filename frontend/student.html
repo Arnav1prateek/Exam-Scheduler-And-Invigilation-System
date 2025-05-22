@@ -33,6 +33,11 @@
           <span id="student-semester"></span>
         </div>
       </div>
+      <div class="profile-actions">
+        <button id="profile-btn" class="profile-btn">
+          <i class="fas fa-user-cog"></i> My Profile
+        </button>
+      </div>
       <div class="logout-section">
         <button id="logout-btn" class="logout-btn">
           <i class="fas fa-sign-out-alt"></i> Logout
@@ -68,5 +73,49 @@
   </div>
 
   <script src="student.js"></script>
+  <!-- Profile Modal -->
+<div id="profile-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>My Profile</h2>
+    <div class="profile-info">
+      <div class="info-item">
+        <span>Student ID:</span>
+        <span id="profile-id"></span>
+      </div>
+      <div class="info-item">
+        <span>Email:</span>
+        <span id="profile-email"></span>
+      </div>
+    </div>
+    <button id="change-password-btn" class="change-password-btn">
+      Change Password
+    </button>
+  </div>
+</div>
+
+<!-- Password Change Modal -->
+<div id="password-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>Change Password</h2>
+    <form id="password-change-form">
+      <div class="form-group">
+        <label for="current-password">Current Password</label>
+        <input type="password" id="current-password" required>
+      </div>
+      <div class="form-group">
+        <label for="new-password">New Password</label>
+        <input type="password" id="new-password" required>
+      </div>
+      <div class="form-group">
+        <label for="confirm-password">Confirm New Password</label>
+        <input type="password" id="confirm-password" required>
+      </div>
+      <button type="submit" class="submit-btn">Update Password</button>
+      <p id="password-error" class="error-message"></p>
+    </form>
+  </div>
+</div>
 </body>
 </html>

@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         
         const data = await res.json();
-        console.log('API Response:', data); // Log the response for debugging
+        console.log('API Response:', data);
         
         // Validate response structure
         if (!data || typeof data !== 'object') {
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         // Populate timetable
         const tbody = document.getElementById('timetable-body');
-        tbody.innerHTML = ''; // Clear existing content
+        tbody.innerHTML = '';
         
         if (!data.exams || data.exams.length === 0) {
             const row = document.createElement('tr');
@@ -77,16 +77,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Add logout functionality
         document.getElementById('logout-btn').addEventListener('click', () => {
-            // Clear any session data
-            localStorage.removeItem('studentToken');
-            // Redirect to login page
-            window.location.href = '../login.html';
+            localStorage.removeItem('student_id');
+            window.location.href = 'login.html';
         });
+        
+        // Initialize profile modal after all content is loaded
+        setupProfileModal(data.student);
         
     } catch (err) {
         console.error('Error loading student dashboard:', err);
         
-        // Update error display
         const errorEl = document.createElement('div');
         errorEl.className = 'error-message show';
         errorEl.innerHTML = `
@@ -94,13 +94,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             <small>Please try again later or contact support if the problem persists.</small>
         `;
         
-        // Insert error message at the top of main content
         const mainContent = document.querySelector('.main-content');
         if (mainContent) {
             mainContent.prepend(errorEl);
         }
         
-        // Set placeholder values
         document.getElementById('student-name').textContent = 'Error loading data';
         document.getElementById('student-dept').textContent = 'N/A';
         document.getElementById('student-year').textContent = 'N/A';
@@ -124,4 +122,94 @@ function formatTimeRange(start, end) {
     if (!start) return `Ends at ${end}`;
     if (!end) return `Starts at ${start}`;
     return `${start} - ${end}`;
+}
+
+function setupProfileModal(studentData) {
+    const modal = document.getElementById('profile-modal');
+    const passwordModal = document.getElementById('password-modal');
+    const profileBtn = document.getElementById('profile-btn');
+    const closeButtons = document.querySelectorAll('.close-modal');
+    const changePasswordBtn = document.getElementById('change-password-btn');
+    const passwordForm = document.getElementById('password-change-form');
+    const passwordError = document.getElementById('password-error');
+    const profileId = document.getElementById('profile-id');
+    const profileEmail = document.getElementById('profile-email');
+
+    // Check if required elements exist
+    if (!modal || !passwordModal || !profileBtn || !changePasswordBtn || !passwordForm) {
+        console.error('One or more required elements not found');
+        return;
+    }
+
+    // Populate profile info if available
+    if (studentData && profileId && profileEmail) {
+        profileId.textContent = studentData.student_id || 'N/A';
+        profileEmail.textContent = studentData.email || 'N/A';
+    }
+
+    // Open profile modal
+    profileBtn.addEventListener('click', () => {
+        modal.style.display = 'block';
+    });
+
+    // Open password change modal
+    changePasswordBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        passwordModal.style.display = 'block';
+    });
+
+    // Close modals
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            passwordModal.style.display = 'none';
+        });
+    });
+
+    // Close when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+        if (e.target === passwordModal) passwordModal.style.display = 'none';
+    });
+
+    // Handle password change
+    passwordForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (passwordError) passwordError.textContent = '';
+        
+        const newPassword = document.getElementById('new-password')?.value;
+        const confirmPassword = document.getElementById('confirm-password')?.value;
+
+        if (!newPassword || !confirmPassword) {
+            if (passwordError) passwordError.textContent = 'Please fill in all fields';
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            if (passwordError) passwordError.textContent = 'New passwords do not match';
+            return;
+        }
+
+        try {
+            const studentId = localStorage.getItem('student_id');
+            const response = await fetch('/student/change_password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: studentId, password: newPassword })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert('Password changed successfully!');
+                if (passwordModal) passwordModal.style.display = 'none';
+                passwordForm.reset();
+            } else {
+                if (passwordError) passwordError.textContent = result.message || 'Failed to change password';
+            }
+        } catch (err) {
+            console.error('Error changing password:', err);
+            if (passwordError) passwordError.textContent = 'An error occurred. Please try again.';
+        }
+    });
 }

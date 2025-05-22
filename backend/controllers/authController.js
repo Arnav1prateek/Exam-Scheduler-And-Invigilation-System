@@ -30,7 +30,6 @@ const studentLogin = async (req, res) => {
     res.status(200).json({
       message: 'Login successful',
       id: student.student_id,
-      first_login: student.first_login,
       role: 'student'
     });
 

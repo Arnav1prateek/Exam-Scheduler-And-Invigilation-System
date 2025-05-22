@@ -26,7 +26,8 @@ app.use('/api/faculty', facultyRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/auth', require('./routes/auth'));
 app.use('/student', require('./routes/student'));
-app.use(express.json());
+app.use('/api/student', require('./routes/student'));
+
 
 
 // HTML page routes

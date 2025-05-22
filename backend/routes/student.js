@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const studentController = require('../controllers/studentController');
 
-// Route to get student timetable
-router.get('/:id', studentController.getTimetable);
+// Student profile routes
+router.route('/:id')
+    .get(studentController.getTimetable);
 
-// Route to change password
-router.post('/change_password', studentController.changePassword);
+// Password change route
+router.route('/change_password')
+    .post(studentController.changePassword);
 
 module.exports = router;
