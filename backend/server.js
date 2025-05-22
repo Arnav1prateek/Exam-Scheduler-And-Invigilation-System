@@ -24,6 +24,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/faculty', facultyRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/auth', require('./routes/auth'));
+
 
 // HTML page routes
 app.get('/login', (req, res) => {

@@ -1,15 +1,15 @@
-const pool = require('../db'); // Make sure this import is at the top
+const pool = require('../db');
+const bcrypt = require('bcrypt');
 
 const getTimetable = async (req, res) => {
     const { id } = req.params;
 
     try {
-        // Get complete student information
         const studentQuery = await pool.query(`
             SELECT student_id, first_name, last_name, email, department, academic_year, semester 
             FROM Student WHERE student_id = $1
         `, [id]);
-        
+
         if (studentQuery.rows.length === 0) {
             return res.status(404).json({ message: 'Student not found' });
         }
@@ -17,7 +17,6 @@ const getTimetable = async (req, res) => {
         const student = studentQuery.rows[0];
         const { department, semester } = student;
 
-        // Get exams for the student's department and semester
         const examsQuery = await pool.query(`
             SELECT exam_id, subject, date, start_time, end_time, r.room_no, e.department
             FROM Exam e
@@ -43,7 +42,26 @@ const getTimetable = async (req, res) => {
     }
 };
 
-// Make sure to export the function
+// NEW: Change password function
+const changePassword = async (req, res) => {
+    const { id, newPassword } = req.body;
+
+    try {
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        await pool.query(
+            'UPDATE Student SET password = $1, first_login = false WHERE student_id = $2',
+            [hashedPassword, id]
+        );
+
+        res.status(200).json({ message: 'Password changed successfully' });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
 module.exports = {
-    getTimetable
+    getTimetable,
+    changePassword
 };
