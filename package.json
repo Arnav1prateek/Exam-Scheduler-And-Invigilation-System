@@ -16,5 +16,8 @@
     "url": "https://github.com/Arnav1prateek/Exam-Scheduler-And-Invigilation-System/issues"
   },
   "homepage": "https://github.com/Arnav1prateek/Exam-Scheduler-And-Invigilation-System#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0"
+  }
 }
