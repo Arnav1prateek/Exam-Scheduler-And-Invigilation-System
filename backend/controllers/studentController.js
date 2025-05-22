@@ -44,10 +44,16 @@ const getTimetable = async (req, res) => {
 
 // NEW: Change password function
 const changePassword = async (req, res) => {
-    const { id, newPassword } = req.body;
+    const { id, password } = req.body; // ✅ FIXED name
+
+    console.log("Received in changePassword:", { id, password });
+
+    if (!id || !password) {
+        return res.status(400).json({ message: 'ID and password required' });
+    }
 
     try {
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         await pool.query(
             'UPDATE Student SET password = $1, first_login = false WHERE student_id = $2',

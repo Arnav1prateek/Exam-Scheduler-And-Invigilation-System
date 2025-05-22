@@ -6,6 +6,6 @@ const studentController = require('../controllers/studentController');
 router.get('/:id', studentController.getTimetable);
 
 // Route to change password
-router.post('/change-password', studentController.changePassword);
+router.post('/change_password', studentController.changePassword);
 
 module.exports = router;

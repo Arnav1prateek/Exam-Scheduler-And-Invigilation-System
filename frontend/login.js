@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem("student_id", result.id);
 
         if (result.first_login) {
-          window.location.href = "change-password.html";
+          window.location.href = "change_password.html";
         } else {
           window.location.href = "student.html";
         }
